@@ -5,3 +5,7 @@ from django.http import HttpResponse
 
 def test(request):
 	return render(request, 'practice/test.html')
+
+def post(request):
+
+	return HttpResponse('<h1>received</h1>')
