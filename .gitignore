@@ -1,0 +1,8 @@
+
+\.idea/
+
+django_learning/__pycache__/
+
+blog/__pycache__/
+
+practice/__pycache__/
