@@ -6,3 +6,7 @@ django_learning/__pycache__/
 blog/__pycache__/
 
 practice/__pycache__/
+
+blog/migrations/__pycache__/
+
+practice/migrations/__pycache__/

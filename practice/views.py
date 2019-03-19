@@ -7,5 +7,5 @@ def test(request):
 	return render(request, 'practice/test.html')
 
 def post(request):
-
+	print('post function found.')
 	return HttpResponse('<h1>received</h1>')
