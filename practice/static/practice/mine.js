@@ -1,17 +1,29 @@
 myfunction();
 function myfunction(){
-	document.write('Hello World!');
-	data = [{'foo':'bar','baz':'jazz'}];
-	$.ajax({
-	    type: "POST",
-	    url:"/post/",
+	console.log("I am in the function now!");
+	var csrftoken = Cookies.get("csrftoken");
+	/*$.ajax({
+	    type: 'POST',
+	    url: "/post",
 	    data: {
-	    'test': 'success',
+	        "partner_ref": "PH",
+	        "return_field": ["summary", "details"]
 	    },
-	    success: function(){
-	      alert('test')
-	     },
-	    error: function(){
-	        alert("Error");
+	    success: function(data){
+
+	    },
+	    dataType: 'json'
+	});*/
+	$.ajaxSetup({
+    	data: {csrfmiddlewaretoken: csrftoken},
+	});
+	$.post({
+	    url : "/post",
+	    data : {a : "test"},
+	    success : function(response){
+	    	console.log("Received");
+	    	console.log(response.data);
+	    },
+	    dataType : "json"
 	});
 };

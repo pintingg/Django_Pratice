@@ -1,11 +1,13 @@
+from django.contrib.staticfiles.templatetags import staticfiles
 from django.shortcuts import render
-from django.http import HttpResponse
-
+from django.http import HttpResponse, JsonResponse
 # Create your views here.
 
 def test(request):
 	return render(request, 'practice/test.html')
 
+
 def post(request):
-	print('post function found.')
-	return HttpResponse('<h1>received</h1>')
+	print(request.method)
+	print(request.POST.get('a', 'Not get'))
+	return JsonResponse({'data' : 'Succeed'})
