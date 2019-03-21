@@ -10,3 +10,5 @@ practice/__pycache__/
 blog/migrations/__pycache__/
 
 practice/migrations/__pycache__/
+
+test\.py
