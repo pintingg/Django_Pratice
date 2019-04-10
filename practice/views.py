@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse, HttpResponseNotFound
+from django.http import HttpResponse, JsonResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
-
+import json
 
 # Create your views here.
 
@@ -10,9 +10,18 @@ def home(request):
 
 @csrf_exempt
 def api(request):
-	data = request.POST
-	if data:
-		print('{} is {}.'.format(data['a'], data['b']))
-		return JsonResponse({'data' : 'Hi, Ming.'})
+	if request.method != 'POST': return HttpResponseBadRequest('unsupported type of request')
+	content_type = request.META.get('CONTENT_TYPE', 'json')
+	if content_type == 'application/x-www-form-urlencoded':
+		data = request.POST
+		print(request.POST)
+	elif content_type == 'application/json':
+		data = json.loads(request.body)
+		print(request.body)
 	else:
-		return render(request, 'practice/errorpage.html')
+		return HttpResponseBadRequest('nunsupported type of content')
+	if data:
+		print('{} is {}.'.format(data['text'], data['type']))
+		return JsonResponse({'data' : 'Hello World.'})
+	else:
+		return HttpResponseBadRequest('No data is received')
